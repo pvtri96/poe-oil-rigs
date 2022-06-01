@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 async function getOilOverview(): Promise<OilsResponse> {
-  const filePath = path.join(process.cwd(), 'resources', 'data', 'oils.json');
+  const filePath = path.join(process.cwd(), 'resources', 'data', '.cache', 'oils.json');
 
   if (!fs.existsSync(filePath)) {
     console.log('No cache found for oils, start fetching!');
@@ -18,7 +18,7 @@ async function getOilOverview(): Promise<OilsResponse> {
 }
 
 async function getCurrencyOverview(): Promise<CurrencyResponse> {
-  const filePath = path.join(process.cwd(), 'resources', 'data', 'currency.json');
+  const filePath = path.join(process.cwd(), 'resources', 'data', '.cache', 'currency.json');
 
   if (!fs.existsSync(filePath)) {
     console.log('No cache found for currency, start fetching!');

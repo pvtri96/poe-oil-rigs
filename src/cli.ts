@@ -1,7 +1,8 @@
+import flow from 'lodash/flow';
+import open from 'open';
+import path from 'path';
 import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs/yargs';
-import open from 'open';
-import flow from 'lodash/flow';
 import { getAmuletAnointments } from './amulet-anointments';
 import { getOilValueForAmulet, getOilValueForRing } from './calc';
 import { getOilsAndExtractor } from './oils';
@@ -31,6 +32,7 @@ yargs(hideBin(process.argv))
       return yargs.positional('path', {
         describe: 'JSON file which is retrieved from get-stash command',
         type: 'string',
+        default: path.join(process.cwd(), 'resources', 'data', 'stash.json'),
       });
     },
     async (argv) => {

@@ -11,7 +11,7 @@ export function out(calculatedItems: CalculatedItem[], oilExtractor: Currency) {
     calculatedItems.map(([item, oils, value]) => {
       return {
         name: item.name || item.baseType,
-        enchant: item.enchantMods,
+        enchant: item.enchantMods?.[0] ?? 'No enchantment',
         oils: oils.map((oil) => oil.baseType),
         value: value,
       };
@@ -26,7 +26,7 @@ export function out(calculatedItems: CalculatedItem[], oilExtractor: Currency) {
     valuableItems.map(([item, oils, value, avg]) => {
       return {
         name: item.name || item.baseType,
-        enchant: item.enchantMods,
+        enchant: item.enchantMods?.[0] ?? 'No enchantment',
         oils: oils.map((oil) => oil.baseType),
         value: value,
         avg: avg,

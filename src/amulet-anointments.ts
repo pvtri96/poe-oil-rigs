@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 async function getContent(): Promise<string> {
-  const filePath = path.join(process.cwd(), 'resources', 'data', 'amulet-anointments.html');
+  const filePath = path.join(process.cwd(), 'resources', 'data', '.cache', 'amulet-anointments.html');
 
   if (!fs.existsSync(filePath)) {
     console.log('No cache found for anointments, start fetching!');
