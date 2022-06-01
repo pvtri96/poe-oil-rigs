@@ -69,4 +69,9 @@ interface CurrencyResponse {
 export interface Currency {
   currencyTypeName: string;
   chaosEquivalent: number;
+  receive: {
+    value: number;
+    count: number;
+    listing_count: number;
+  };
 }

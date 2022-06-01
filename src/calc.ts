@@ -22,7 +22,7 @@ export function getOilValueForRing(
         }
 
         const value = oils.reduce((value, oil) => value + oil.chaosValue, 0);
-        const avg = value / 2;
+        const avg = betterRound(value / 2);
 
         result.push([ring, oils, value, avg]);
       }
@@ -49,12 +49,15 @@ export function getOilValueForAmulet(
         }
 
         const value = oils.reduce((value, oil) => value + oil.chaosValue, 0);
-        const avg = value / 3;
-
+        const avg = betterRound(value / 3);
         result.push([amulet, oils, value, avg]);
       }
     }
   }
 
   return result;
+}
+
+function betterRound(v: number) {
+  return Math.round(v * 100) / 100;
 }
