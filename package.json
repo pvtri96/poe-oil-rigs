@@ -24,7 +24,9 @@
   },
   "scripts": {
     "main": "node --experimental-specifier-resolution=node --loader ts-node/esm src/main.ts",
-    "start": "node --experimental-specifier-resolution=node --loader ts-node/esm src/cli.ts",
+    "start": "npm run check",
+    "check": "npm run cli -- check",
+    "login": "npm run cli -- login",
     "cli": "node --experimental-specifier-resolution=node --loader ts-node/esm src/cli.ts",
     "clean": "rimraf coverage tmp",
     "prebuild": "npm run lint",

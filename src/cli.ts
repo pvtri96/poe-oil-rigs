@@ -18,6 +18,7 @@ yargs(hideBin(process.argv))
     async () => {
       const answer = await inquirer.prompt({
         name: 'method',
+        type: 'list',
         message: 'Choose your authentication method',
         choices: ['poesessid'],
         default: 'poesessid',
