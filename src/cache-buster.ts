@@ -3,7 +3,7 @@ import path from 'path';
 
 export const CACHE_LOCATION = path.join(process.cwd(), 'resources', 'data', '.cache');
 
-export function isCacheValid(filePath: string, age = 60 * 1000 /** 4 hours */) {
+export function isCacheValid(filePath: string, age = 3600 * 1000 /** 1 hours */) {
   if (!fs.existsSync(getMetaFilePath(filePath))) {
     return false;
   }
