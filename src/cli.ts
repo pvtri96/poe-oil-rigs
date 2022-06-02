@@ -1,9 +1,9 @@
+import inquirer from 'inquirer';
 import flow from 'lodash/flow';
-import open from 'open';
-import path from 'path';
 import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs/yargs';
 import { getAmuletAnointments } from './amulet-anointments';
+import { sessionid } from './authentication';
 import { getOilValueForAmulet, getOilValueForRing } from './calc';
 import { getOilsAndExtractor } from './oils';
 import { out } from './out';
@@ -12,32 +12,33 @@ import { getAmulets, getRings, getStash, withEnchant } from './stash';
 
 yargs(hideBin(process.argv))
   .command(
-    'get-stash',
-    'Retrieve the stash information',
-    (yargs) => {
-      return yargs
-        .positional('username', { describe: 'POE account name' })
-        .positional('tab', { describe: 'Tab index', default: 0 });
-    },
-    async (argv) => {
-      await open(
-        `https://www.pathofexile.com/character-window/get-stash-items?league=Sentinel&tabs=1&tabIndex=${argv.tab}&accountName=${argv.username}`,
-      );
+    'login',
+    'Login to let the tool be able to retrieve the stash API',
+    (yargs) => yargs,
+    async () => {
+      const answer = await inquirer.prompt({
+        name: 'method',
+        message: 'Choose your authentication method',
+        choices: ['poesessid'],
+        default: 'poesessid',
+      });
+      switch (answer['method']) {
+        case 'poesessid':
+          await sessionid();
+          break;
+        default:
+          throw new Error(`Invalid authentication method.`);
+      }
     },
   )
   .command(
     'check',
     '',
-    (yargs) => {
-      return yargs.positional('path', {
-        describe: 'JSON file which is retrieved from get-stash command',
-        type: 'string',
-        default: path.join(process.cwd(), 'resources', 'data', 'stash.json'),
-      });
-    },
-    async (argv) => {
-      const rings = flow(getStash, getRings, withEnchant)(argv.path);
-      const amulets = flow(getStash, getAmulets, withEnchant)(argv.path);
+    (yargs) => yargs,
+    async () => {
+      const stash = await getStash();
+      const rings = flow(getRings, withEnchant)(stash);
+      const amulets = flow(getAmulets, withEnchant)(stash);
 
       const [oils, oilExtractor] = await getOilsAndExtractor();
       const ringAnointments = await getRingAnointments();

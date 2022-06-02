@@ -4,11 +4,11 @@ import { getOilValueForAmulet, getOilValueForRing } from './calc';
 import { getOilsAndExtractor } from './oils';
 import { out } from './out';
 import { getRingAnointments } from './ring-anointments';
-import { getAmulets, getRings, getStash, withEnchant } from './stash';
+import { getAmulets, getRings, getStashFixture, withEnchant } from './stash';
 
 async function main() {
-  const rings = flow(getStash, getRings, withEnchant)();
-  const amulets = flow(getStash, getAmulets, withEnchant)();
+  const rings = flow(getStashFixture, getRings, withEnchant)();
+  const amulets = flow(getStashFixture, getAmulets, withEnchant)();
 
   const [oils, oilExtractor] = await getOilsAndExtractor();
   const ringAnointments = await getRingAnointments();
