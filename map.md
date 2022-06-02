@@ -1,1 +1,3 @@
-vuln|block|bur|tempo|reg|"um player"
+block|tempo|regen
+block|tempo|regen|bur
+max res
