@@ -11,6 +11,7 @@ import { getRingAnointments } from './ring-anointments';
 import { getAmulets, getRings, getStash, withEnchant } from './stash';
 
 yargs(hideBin(process.argv))
+  .version(process.env.__NAME__ ?? 'build')
   .command(
     'login',
     'Login to let the tool be able to retrieve the stash API',

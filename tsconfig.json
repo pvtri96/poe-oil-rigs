@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
+    "module": "es2020",
+    "target": "es2020",
+    "moduleResolution": "node",
     "esModuleInterop": true,
-    "target": "ESNext",
-    "moduleResolution": "Node",
-    "outDir": "dist",
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "isolatedModules": false,
     "strict": true,
     "noImplicitAny": true,
     "useUnknownInCatchVariables": false,
-    "inlineSourceMap": true
+    "inlineSourceMap": true,
+    "outDir": "build"
   },
-  "lib": ["esnext"],
+  "lib": ["es2020"],
   "ts-node": {
     "esm": true
   },

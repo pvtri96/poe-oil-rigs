@@ -4,15 +4,16 @@ on: [push]
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: volta-cli/action@v1
-    - run: npm ci --no-audit
-    - run: npm run lint --if-present
-    - run: npm test
-    - run: npm run build --if-present
-      env:
-        CI: true
+      - uses: actions/checkout@v2
+      - uses: volta-cli/action@v1
+      - run: npm ci --no-audit
+      - run: npm run lint --if-present
+      - run: npm run build --if-present
+      - name: Archive artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: poe-oil-rigs.exe
+          path: dist/poe-oil-rigs.exe

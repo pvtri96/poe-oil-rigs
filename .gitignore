@@ -29,3 +29,6 @@ build/
 .DS_Store
 
 **/*stash.json
+
+build/
+dist/
