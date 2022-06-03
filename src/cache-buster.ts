@@ -6,6 +6,7 @@ export const CACHE_LOCATION =
   process.env.NODE_ENV === 'production'
     ? path.join(getAppDataPath(process.env.__NAME__), '.cache')
     : path.join(process.cwd(), 'resources', 'data', '.cache');
+
 if (!fs.existsSync(CACHE_LOCATION)) {
   fs.mkdirSync(CACHE_LOCATION, { recursive: true });
 }

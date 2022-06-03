@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "@types/jest": "~27.4",
-    "@types/node": "~16.11",
+    "@types/node": "~16.15",
     "@typescript-eslint/eslint-plugin": "~5.14",
     "@typescript-eslint/parser": "~5.14",
     "eslint": "~8.11",
@@ -58,12 +58,12 @@
   },
   "pkg": {
     "targets": [
-      "node16-win-x64"
+      "host"
     ],
     "outputPath": "dist"
   },
   "bin": "./bin/cli",
   "volta": {
-    "node": "16.13.0"
+    "node": "16.15"
   }
 }
