@@ -1,3 +1,2 @@
-block|tempo|regen
-block|tempo|regen|bur
+rege|burni|chains|suppressed
 max res

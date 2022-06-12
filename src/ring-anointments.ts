@@ -27,10 +27,10 @@ function parseAnointments(content: string) {
 
   rows.each((_, row) => {
     const oilCell = $('td:eq(1)', row);
-    const oils: string[] = [$('a:eq(0)', oilCell).text(), $('a:eq(1)', oilCell).text()];
+    const oils: string[] = [$('a:eq(0)', oilCell).text().trim(), $('a:eq(1)', oilCell).text().trim()];
 
     const anointment: RingAnointment = {
-      mod: $('td:eq(2)', row).text(),
+      mod: $('td:eq(2)', row).text().trim(),
       oils,
     };
     result.push(anointment);

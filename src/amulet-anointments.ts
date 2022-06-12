@@ -27,11 +27,15 @@ function parseAnointments(content: string) {
 
   rows.each((_, row) => {
     const oilCell = $('td:eq(1)', row);
-    const oils: string[] = [$('a:eq(0)', oilCell).text(), $('a:eq(1)', oilCell).text(), $('a:eq(2)', oilCell).text()];
+    const oils: string[] = [
+      $('a:eq(0)', oilCell).text().trim(),
+      $('a:eq(1)', oilCell).text().trim(),
+      $('a:eq(2)', oilCell).text().trim(),
+    ];
 
     const anointment: AmuletAnointment = {
       notable: $('td:eq(2) a', row).text(),
-      description: $('td:eq(2) .explicitMod', row).text(),
+      description: $('td:eq(2) .explicitMod', row).text().trim(),
       oils,
     };
     result.push(anointment);

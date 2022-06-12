@@ -36,12 +36,14 @@ async function login() {
 async function check() {
   const stash = await getStash();
   const rings = flow(getRings, withEnchant)(stash);
+  // console.log('rings', rings);
   const amulets = flow(getAmulets, withEnchant)(stash);
 
   const [oils, oilExtractor] = await getOilsAndExtractor();
   const ringAnointments = await getRingAnointments();
   const amuletAnointments = await getAmuletAnointments();
-
+  console.log('rings annoimts', ringAnointments);
+  // console.log('rings 2', getOilValueForRing(rings, ringAnointments, oils));
   const itemsWithValue = [
     ...getOilValueForRing(rings, ringAnointments, oils),
     ...getOilValueForAmulet(amulets, amuletAnointments, oils),
