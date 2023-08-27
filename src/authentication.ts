@@ -3,6 +3,8 @@ import inquirer from 'inquirer';
 import path from 'path';
 import { burstCache, CACHE_LOCATION, isCacheValid, updateCacheMeta } from './cache-buster';
 
+const DEFAULT_LEAGUE = 'Ancestor';
+
 export interface AuthenticationPayload {
   method: 'poesessid';
   accountName: string;
@@ -23,7 +25,7 @@ export async function sessionid() {
   const answer = await inquirer.prompt([
     { name: 'accountName', message: 'Your account name' },
     { name: 'poesessid', message: 'Fill your POESESSID' },
-    { name: 'league', message: 'Your current league', default: 'Sentinel' },
+    { name: 'league', message: 'Your current league', default: DEFAULT_LEAGUE },
   ]);
 
   const payload: AuthenticationPayload = { method: 'poesessid', ...answer };
@@ -42,4 +44,14 @@ export function getAuthentication(): AuthenticationPayload {
 
   const file = fs.readFileSync(filePath, { encoding: 'utf-8' });
   return JSON.parse(file);
+}
+
+export function getLeague(): string {
+  if(!fs.existsSync(filePath)) {
+    return DEFAULT_LEAGUE;
+  }
+
+  const file = fs.readFileSync(filePath, { encoding: 'utf-8' });
+  const auth = JSON.parse(file);
+  return auth['league'];
 }

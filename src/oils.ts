@@ -2,6 +2,9 @@ import fetch from 'node-fetch';
 import * as fs from 'fs';
 import * as path from 'path';
 import { burstCache, CACHE_LOCATION, isCacheValid, updateCacheMeta } from './cache-buster';
+import { getLeague } from './authentication';
+
+const league = getLeague();
 
 async function getOilOverview(): Promise<OilsResponse> {
   const filePath = path.join(CACHE_LOCATION, 'oils.json');
@@ -9,7 +12,7 @@ async function getOilOverview(): Promise<OilsResponse> {
   if (!isCacheValid(filePath)) {
     console.log('No cache found or outdated cache for oils, start fetching!');
     burstCache(filePath);
-    const url = 'https://poe.ninja/api/data/ItemOverview?league=Sentinel&type=Oil&language=en';
+    const url = `https://poe.ninja/api/data/ItemOverview?league=${league}&type=Oil&language=en`;
     const result = await fetch(url).then((res) => res.json());
 
     fs.writeFileSync(filePath, JSON.stringify(result));
@@ -26,7 +29,7 @@ async function getCurrencyOverview(): Promise<CurrencyResponse> {
   if (!isCacheValid(filePath)) {
     console.log('No cache found or outdated cache for currency, start fetching!');
     burstCache(filePath);
-    const url = 'https://poe.ninja/api/data/CurrencyOverview?league=Sentinel&type=Currency&language=en';
+    const url = `https://poe.ninja/api/data/CurrencyOverview?league=${league}&type=Currency&language=en`;
     const result = await fetch(url).then((res) => res.json());
 
     fs.writeFileSync(filePath, JSON.stringify(result));
